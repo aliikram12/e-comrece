@@ -156,6 +156,17 @@ include '../includes/header.php';
                 </div>
                 <?php endif; ?>
                 
+                <!-- Custom Color Selection -->
+                <div class="mb-4">
+                    <h6>Choose Color:</h6>
+                    <select class="form-select color-select" name="color">
+                        <option value="">Select Color</option>
+                        <option value="Gray">Gray</option>
+                        <option value="Black">Black</option>
+                        <option value="Dusty Gold">Dusty Gold</option>
+                    </select>
+                </div>
+                
                 <!-- Quantity & Actions -->
                 <div class="mb-4">
                     <form method="POST" action="<?php echo SITE_URL; ?>api/add-to-cart.php" class="row g-3">
@@ -171,7 +182,7 @@ include '../includes/header.php';
                             <label class="form-label">&nbsp;</label>
                             <div class="d-flex gap-2">
                                 <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-                                <button type="submit" class="btn btn-primary btn-lg flex-grow-1">
+                                <button type="button" class="btn btn-primary btn-lg flex-grow-1 add-to-cart-btn" data-product-id="<?php echo $product_id; ?>">
                                     <i class="fas fa-shopping-cart me-2"></i>Add to Cart
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary btn-lg" onclick="toggleWishlist(<?php echo $product_id; ?>)">

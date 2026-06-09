@@ -18,8 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $cart = new Cart($conn);
     $user_id = isLoggedIn() ? $_SESSION['user_id'] : null;
+    $color = isset($_POST['color']) && !empty($_POST['color']) ? sanitize($_POST['color']) : null;
     
-    if ($cart->addToCart($product_id, $quantity, $user_id)) {
+    if ($cart->addToCart($product_id, $quantity, $user_id, null, $color)) {
         $response['success'] = true;
         $response['message'] = 'Product added to cart';
         $response['cart_count'] = $cart->getCartCount($user_id);

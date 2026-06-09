@@ -10,7 +10,7 @@ class Cart {
     }
     
     // Add to cart
-    public function addToCart($product_id, $quantity = 1, $user_id = null, $variant_id = null) {
+    public function addToCart($product_id, $quantity = 1, $user_id = null, $variant_id = null, $color = null) {
         $session_id = session_id();
         
         // Check if product already in cart
@@ -27,6 +27,12 @@ class Cart {
             $check_query .= " AND variant_id = $variant_id";
         }
         
+        if ($color) {
+            $check_query .= " AND color = '" . $this->conn->real_escape_string($color) . "'";
+        } else {
+            $check_query .= " AND color IS NULL";
+        }
+        
         $result = $this->conn->query($check_query);
         
         if ($result->num_rows > 0) {
@@ -38,7 +44,7 @@ class Cart {
             return $this->conn->query($update_query);
         } else {
             // Insert new item
-            $insert_query = "INSERT INTO $this->table (product_id, quantity, user_id, session_id, variant_id) 
+            $insert_query = "INSERT INTO $this->table (product_id, quantity, user_id, session_id, variant_id, color) 
                              VALUES ($product_id, $quantity, ";
             
             if ($user_id) {
@@ -47,7 +53,8 @@ class Cart {
                 $insert_query .= "NULL, '$session_id', ";
             }
             
-            $insert_query .= ($variant_id ? $variant_id : "NULL") . ")";
+            $insert_query .= ($variant_id ? $variant_id : "NULL") . ", ";
+            $insert_query .= ($color ? "'" . $this->conn->real_escape_string($color) . "'" : "NULL") . ")";
             
             return $this->conn->query($insert_query);
         }
@@ -57,7 +64,7 @@ class Cart {
     public function getCartItems($user_id = null) {
         $session_id = session_id();
         
-        $query = "SELECT c.*, p.product_name, p.price, p.image, pv.color, pv.size 
+        $query = "SELECT c.*, p.product_name, p.price, p.image, COALESCE(c.color, pv.color) as color, pv.size 
                   FROM $this->table c 
                   INNER JOIN products p ON c.product_id = p.product_id 
                   LEFT JOIN product_variants pv ON c.variant_id = pv.variant_id 

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const productId = this.dataset.productId;
-            addToCart(productId);
+            addToCart(productId, this);
         });
     });
     
@@ -62,13 +62,41 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Add to cart function
-function addToCart(productId) {
-    const quantity = document.querySelector('.qty-input') ? 
-                     parseInt(document.querySelector('.qty-input').value) : 1;
+function addToCart(productId, btnElement = null) {
+    let quantity = 1;
+    let color = null;
+    
+    if (btnElement) {
+        // Try to find quantity and color within the same product container (for index.php/shop.php)
+        const container = btnElement.closest('.product-card') || btnElement.closest('.product-detail');
+        if (container) {
+            const qtyInput = container.querySelector('.qty-input');
+            if (qtyInput) quantity = parseInt(qtyInput.value);
+            
+            const colorSelect = container.querySelector('.color-select');
+            if (colorSelect && colorSelect.value) color = colorSelect.value;
+        }
+    } else {
+        // Fallback for direct calls
+        const qtyInput = document.querySelector('.qty-input');
+        if (qtyInput) quantity = parseInt(qtyInput.value);
+        
+        const colorSelect = document.querySelector('.color-select');
+        if (colorSelect && colorSelect.value) color = colorSelect.value;
+    }
+    
+    if (!color) {
+        showNotification('Please select a color first!', 'warning');
+        return;
+    }
     
     const formData = new FormData();
     formData.append('product_id', productId);
     formData.append('quantity', quantity);
+    
+    if (color) {
+        formData.append('color', color);
+    }
     
     fetch(SITE_URL + 'api/add-to-cart.php', {
         method: 'POST',

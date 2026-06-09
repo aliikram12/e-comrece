@@ -77,7 +77,7 @@
     </script>
     
     <!-- Custom JS -->
-    <script src="<?php echo SITE_URL; ?>assets/js/main.js"></script>
+    <script src="<?php echo SITE_URL; ?>assets/js/main.js?v=<?php echo time(); ?>"></script>
     
     <?php if (isset($extra_js)) { echo $extra_js; } ?>
 </body>
