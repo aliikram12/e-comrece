@@ -27,6 +27,12 @@ if (isset($_GET['remove'])) {
     redirect(SITE_URL . 'pages/cart.php');
 }
 
+// Clear cart
+if (isset($_GET['clear'])) {
+    $cart->clearCart($user_id);
+    redirect(SITE_URL . 'pages/cart.php');
+}
+
 include '../includes/header.php';
 ?>
 
@@ -40,6 +46,15 @@ include '../includes/header.php';
     </nav>
     
     <h2 class="mb-4">Shopping Cart</h2>
+    
+    <?php if (isset($_SESSION['cart_error'])): ?>
+        <div class="alert alert-danger">
+            <?php 
+            echo $_SESSION['cart_error']; 
+            unset($_SESSION['cart_error']);
+            ?>
+        </div>
+    <?php endif; ?>
     
     <div class="row">
         <div class="col-lg-8">

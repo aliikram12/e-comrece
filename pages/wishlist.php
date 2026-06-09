@@ -90,14 +90,6 @@ include '../includes/header.php';
                             <div class="product-price">
                                 <?php echo formatCurrency($item['price']); ?>
                             </div>
-                            <div class="mb-2">
-                                <select class="form-select form-select-sm color-select" name="color">
-                                    <option value="">Select Color</option>
-                                    <option value="Gray">Gray</option>
-                                    <option value="Black">Black</option>
-                                    <option value="Dusty Gold">Dusty Gold</option>
-                                </select>
-                            </div>
                             <div class="product-buttons">
                                 <button class="btn btn-primary btn-sm add-to-cart-btn" data-product-id="<?php echo $item['product_id']; ?>">
                                     <i class="fas fa-shopping-cart"></i> Add

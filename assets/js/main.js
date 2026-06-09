@@ -86,8 +86,22 @@ function addToCart(productId, btnElement = null) {
     }
     
     if (!color) {
-        showNotification('Please select a color first!', 'warning');
-        return;
+        let hasColorSelect = false;
+        if (btnElement) {
+            const container = btnElement.closest('.product-card') || btnElement.closest('.product-detail');
+            if (container && container.querySelector('.color-select')) {
+                hasColorSelect = true;
+            }
+        } else {
+            if (document.querySelector('.color-select')) {
+                hasColorSelect = true;
+            }
+        }
+        
+        if (hasColorSelect) {
+            showNotification('Please select a color first!', 'warning');
+            return;
+        }
     }
     
     const formData = new FormData();

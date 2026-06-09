@@ -94,15 +94,15 @@
                 </a>
                 
                 <!-- Cart -->
-                <a href="<?php echo SITE_URL; ?>pages/cart.php" class="btn btn-light me-2 position-relative">
+                <a href="<?php echo SITE_URL; ?>pages/cart.php" class="btn btn-light me-2 position-relative cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <?php
                     $cart = new Cart($conn);
                     $count = $cart->getCartCount(isLoggedIn() ? $_SESSION['user_id'] : null);
-                    if ($count > 0) {
-                        echo '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">' . $count . '</span>';
-                    }
                     ?>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" <?php echo $count > 0 ? '' : 'style="display: none;"'; ?>>
+                        <?php echo $count > 0 ? $count : ''; ?>
+                    </span>
                 </a>
                 
                 <!-- User Menu -->

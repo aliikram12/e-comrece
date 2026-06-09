@@ -22,6 +22,16 @@ if (empty($cart_items)) {
     redirect(SITE_URL . 'pages/cart.php');
 }
 
+// Ensure all items have a color selected before allowing checkout
+foreach ($cart_items as $item) {
+    if (empty($item['color'])) {
+        // We could use a session flash message here, but redirecting to cart is a good start
+        // Set a session variable to show the error on the cart page
+        $_SESSION['cart_error'] = 'One or more items in your cart do not have a color selected. Please remove them and add them again with a color selected.';
+        redirect(SITE_URL . 'pages/cart.php');
+    }
+}
+
 // Calculate totals
 $subtotal = $cart_total;
 $tax = $subtotal * 0.1; // 10% tax
@@ -32,9 +42,21 @@ $total = $subtotal + $tax + $shipping - $discount;
 // Process order
 $order_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
-    $shipping_address = sanitize($_POST['street_address'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['postal_code'] . ', ' . $_POST['country']);
-    $billing_address = $_POST['same_as_shipping'] ? $shipping_address : sanitize($_POST['billing_street'] . ', ' . $_POST['billing_city'] . ', ' . $_POST['billing_state'] . ', ' . $_POST['billing_postal_code'] . ', ' . $_POST['billing_country']);
-    $payment_method = sanitize($_POST['payment_method']);
+    // Check if all items have a color selected
+    $missing_color = false;
+    foreach ($cart_items as $item) {
+        if (empty($item['color'])) {
+            $missing_color = true;
+            break;
+        }
+    }
+    
+    if ($missing_color) {
+        $order_message = '<div class="alert alert-danger">Error: One or more items in your cart do not have a color selected. Please go back to the cart, remove those items, and add them again with a color selected.</div>';
+    } else {
+        $shipping_address = sanitize($_POST['street_address'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['postal_code'] . ', ' . $_POST['country']);
+        $billing_address = $_POST['same_as_shipping'] ? $shipping_address : sanitize($_POST['billing_street'] . ', ' . $_POST['billing_city'] . ', ' . $_POST['billing_state'] . ', ' . $_POST['billing_postal_code'] . ', ' . $_POST['billing_country']);
+        $payment_method = sanitize($_POST['payment_method']);
     
     // Create order
     $order_result = $order->createOrder(
@@ -68,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         redirect(SITE_URL . 'pages/order-confirmation.php?order_id=' . $order_id);
     } else {
         $order_message = '<div class="alert alert-danger">Error creating order. Please try again.</div>';
+    }
     }
 }
 
