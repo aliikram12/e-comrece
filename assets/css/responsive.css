@@ -1,0 +1,204 @@
+/* Responsive Styles for TechStore */
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .product-card {
+        margin-bottom: 20px;
+    }
+    
+    .product-image {
+        height: 200px;
+    }
+    
+    .order-summary {
+        position: static;
+    }
+    
+    .main-image {
+        max-height: 400px;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Small Devices (576px and below) */
+@media (max-width: 576px) {
+    .hero {
+        padding: 40px 0;
+        margin-bottom: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+    
+    .hero-buttons .btn {
+        margin: 5px 0;
+        display: block;
+        width: 100%;
+    }
+    
+    .product-card {
+        margin-bottom: 15px;
+    }
+    
+    .product-image {
+        height: 180px;
+    }
+    
+    .product-name {
+        font-size: 0.9rem;
+    }
+    
+    .product-price {
+        font-size: 1.1rem;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .cart-item-image {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .product-buttons {
+        flex-direction: column;
+    }
+    
+    .product-buttons .btn {
+        width: 100%;
+    }
+    
+    .quantity-selector {
+        flex-direction: column;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .navbar-nav {
+        gap: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .product-info h1 {
+        font-size: 1.5rem;
+    }
+    
+    .price-display {
+        font-size: 1.5rem;
+    }
+    
+    .thumbnail-images {
+        gap: 5px;
+    }
+    
+    .thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+    
+    footer .row {
+        margin-bottom: 20px;
+    }
+    
+    footer h5 {
+        font-size: 1rem;
+    }
+    
+    .filters-sidebar {
+        margin-bottom: 20px;
+    }
+    
+    .checkout-section {
+        margin-bottom: 15px;
+    }
+    
+    .order-summary {
+        margin-top: 20px;
+    }
+}
+
+/* Extra Small Devices (360px and below) */
+@media (max-width: 360px) {
+    .hero h1 {
+        font-size: 1.3rem;
+    }
+    
+    .product-price {
+        font-size: 1rem;
+    }
+    
+    .product-name {
+        font-size: 0.85rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Dark mode is handled by the main style.css theme */
+
+/* Print Styles */
+@media print {
+    .navbar,
+    footer,
+    .product-buttons,
+    .filters-sidebar {
+        display: none;
+    }
+    
+    body {
+        color: #000;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        padding: 20px 0;
+    }
+    
+    .navbar {
+        padding: 5px 0;
+    }
+}
+
+/* Extra Large Screens (1400px and above) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .product-card {
+        margin-bottom: 30px;
+    }
+}
