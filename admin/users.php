@@ -191,7 +191,6 @@ include '../includes/header.php';
                             <td><?php echo ucfirst($user['status']); ?></td>
                             <td><?php echo date('M d, Y', strtotime($user['created_at'])); ?></td>
                             <td>
-                                <a href="users.php?edit=<?php echo $user['user_id']; ?>" class="btn btn-sm btn-outline-primary">Edit</a>
                                 <form method="POST" class="d-inline-block" onsubmit="return confirm('Delete this user?');">
                                     <input type="hidden" name="delete_user" value="1">
                                     <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
