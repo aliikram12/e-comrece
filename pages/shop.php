@@ -223,12 +223,10 @@ function filterProducts() {
     let categoryId = '';
     
     if (!categorySelect.checked) {
-        for (let i = 1; i <= 100; i++) {
-            const checkbox = document.getElementById('cat_' + i);
-            if (checkbox && checkbox.checked) {
-                categoryId = checkbox.value;
-                break;
-            }
+        // Find the first checked category checkbox that is not the 'all' option
+        const checkedCat = document.querySelector('input[id^="cat_"]:checked:not(#cat_all)');
+        if (checkedCat) {
+            categoryId = checkedCat.value;
         }
     }
     
@@ -247,7 +245,7 @@ function resetFilters() {
 }
 
 // Update price display
-document.getElementById('priceRange')?.addEventListener('change', function() {
+document.getElementById('priceRange')?.addEventListener('input', function() {
     document.getElementById('priceValue').textContent = this.value;
 });
 </script>

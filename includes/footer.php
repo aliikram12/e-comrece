@@ -68,9 +68,8 @@
         </div>
     </footer>
     
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     
+
     <!-- Pass PHP constants to JavaScript -->
     <script>
         const SITE_URL = '<?php echo SITE_URL; ?>';

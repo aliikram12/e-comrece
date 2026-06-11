@@ -174,7 +174,7 @@ function showNotification(message, type = 'info') {
     alertDiv.role = 'alert';
     alertDiv.innerHTML = `
         ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <button type="button" class="btn-close" onclick="this.parentElement.remove()"></button>
     `;
     
     const container = document.querySelector('main') || document.body;

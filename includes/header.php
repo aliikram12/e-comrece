@@ -25,9 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
     
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -46,7 +44,7 @@
             </a>
             
             <!-- Toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" onclick="document.getElementById('navbarNav').classList.toggle('show')">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
@@ -60,7 +58,7 @@
                         <a class="nav-link" href="<?php echo SITE_URL; ?>pages/shop.php">Shop</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button">
                             Categories
                         </a>
                         <ul class="dropdown-menu">
@@ -86,7 +84,7 @@
             <div class="navbar-nav ms-3">
                 <!-- Search -->
                 <div class="nav-item dropdown">
-                    <button class="btn btn-light me-2" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+                    <button class="btn btn-light me-2" type="button" onclick="document.getElementById('searchModal').classList.add('show'); document.getElementById('searchModal').style.display='block'">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -117,7 +115,7 @@
                 
                 <!-- User Menu -->
                 <div class="nav-item dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button">
                         <i class="fas fa-user"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -147,7 +145,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Search Products</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" onclick="document.getElementById('searchModal').classList.remove('show'); document.getElementById('searchModal').style.display='none'"></button>
                 </div>
                 <div class="modal-body">
                     <form action="<?php echo SITE_URL; ?>pages/shop.php" method="GET">
