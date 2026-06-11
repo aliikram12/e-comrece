@@ -30,59 +30,76 @@ $page_title = 'Login - TechStore';
 include '../includes/header.php';
 ?>
 
+<div class="auth-page w-100">
 <div class="container py-5">
     <div class="row">
         <div class="col-md-5 mx-auto">
-            <div class="card shadow-lg border-0">
+            <div class="auth-card border-0">
                 <div class="card-body p-5">
-                    <h2 class="text-center mb-4">Login to Your Account</h2>
+                    <div class="text-center mb-4">
+                        <i class="fas fa-user-circle text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h2>Welcome Back</h2>
+                        <p class="text-muted">Sign in to continue to TechStore</p>
+                    </div>
                     
                     <?php if ($error): ?>
-                    <div class="alert alert-danger"><?php echo $error; ?></div>
+                    <div class="alert alert-danger" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;">
+                        <i class="fas fa-exclamation-circle me-2"></i><?php echo $error; ?>
+                    </div>
                     <?php endif; ?>
                     
                     <form method="POST">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" required
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required
                                    value="<?php echo $_POST['email'] ?? ''; ?>">
+                            <label for="email"><i class="fas fa-envelope me-2 text-muted"></i>Email Address</label>
                         </div>
                         
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            <label for="password"><i class="fas fa-lock me-2 text-muted"></i>Password</label>
                         </div>
                         
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                            <label class="form-check-label" for="remember">
-                                Remember me
-                            </label>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                                <label class="form-check-label text-muted" for="remember">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a href="#" class="text-primary text-decoration-none small">Forgot password?</a>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary btn-lg w-100">Login</button>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill shadow-sm">
+                            Sign In <i class="fas fa-sign-in-alt ms-2"></i>
+                        </button>
                     </form>
                     
-                    <hr class="my-4">
+                    <hr class="my-4 border-secondary opacity-25">
                     
-                    <p class="text-center text-muted mb-3">
-                        Don't have an account? <a href="register.php">Register here</a>
-                    </p>
-                    
-                    <p class="text-center text-muted">
-                        <a href="#" class="text-decoration-none">Forgot password?</a>
+                    <p class="text-center text-muted mb-0">
+                        Don't have an account? <a href="register.php" class="text-primary text-decoration-none fw-bold">Register here</a>
                     </p>
                 </div>
             </div>
             
             <!-- Demo Credentials -->
-            <div class="alert alert-info mt-4">
-                <h6 class="mb-2"><i class="fas fa-info-circle"></i> Demo Login</h6>
-                <p class="mb-1"><strong>Email:</strong> demo@techstore.com</p>
-                <p class="mb-0"><strong>Password:</strong> password123</p>
+            <div class="alert alert-info mt-4" style="background: rgba(14, 165, 233, 0.1); border-color: rgba(14, 165, 233, 0.3); color: #7dd3fc; border-radius: var(--radius-md);">
+                <h6 class="mb-2"><i class="fas fa-info-circle me-2"></i>Demo Login</h6>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="mb-0 small"><strong>User:</strong> demo@techstore.com</p>
+                        <p class="mb-0 small"><strong>Pass:</strong> password123</p>
+                    </div>
+                    <div>
+                        <p class="mb-0 small"><strong>Admin:</strong> admin@techstore.com</p>
+                        <p class="mb-0 small"><strong>Pass:</strong> admin123</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <?php include '../includes/footer.php'; ?>

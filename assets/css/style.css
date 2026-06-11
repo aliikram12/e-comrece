@@ -632,10 +632,112 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
-/* Select Option */
-.form-select option {
-    background: var(--bg-primary);
+/* Custom select text color */
+select.form-select option {
+    color: #111;
+}
+
+/* ===================================================================
+   Auth & Admin Premium UI Enhancements
+   =================================================================== */
+
+/* Glassmorphism Auth Card */
+.auth-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0.8;
+}
+
+/* Floating Labels for Forms */
+.form-floating > .form-control,
+.form-floating > .form-select {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
     color: var(--text-primary);
+    border-radius: var(--radius-md);
+    transition: all var(--transition);
+}
+
+.form-floating > .form-control:focus,
+.form-floating > .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+}
+
+.form-floating > label {
+    color: var(--text-muted);
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select ~ label {
+    color: var(--primary-light);
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+/* Auth Page specific background */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.15), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.1), transparent 40%);
+    background-color: var(--bg-body);
+}
+
+/* Dashboard Metric Cards */
+.metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-elevated);
+}
+
+.metric-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--gradient-primary);
+    transition: width var(--transition);
+}
+
+.metric-card:hover::after {
+    width: 100%;
+}
+
+.metric-icon {
+    font-size: 2rem;
+    color: var(--primary-light);
+    opacity: 0.8;
 }
 
 /* ===================================================================

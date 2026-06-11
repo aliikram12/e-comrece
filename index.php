@@ -18,14 +18,34 @@ include 'includes/header.php';
 ?>
 
 <!-- Hero Section -->
-<section class="hero">
+<section class="hero d-flex align-items-center">
     <div class="container">
-        <span class="badge bg-primary bg-opacity-10 text-primary mb-3 px-3 py-2 rounded-pill animate-slide-up">New Arrivals Available</span>
-        <h1 class="animate-slide-up delay-100">Elevate Your Tech<br>Experience Today</h1>
-        <p class="animate-slide-up delay-200">Discover the latest in premium technology products carefully curated for professionals and enthusiasts.</p>
-        <div class="hero-buttons animate-slide-up delay-300">
-            <a href="pages/shop.php" class="btn btn-primary btn-lg px-5 rounded-pill">Shop Collection</a>
-            <a href="pages/about.php" class="btn btn-outline-light btn-lg px-5 rounded-pill">Learn More</a>
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-start position-relative z-index-2">
+                <span class="badge bg-primary bg-opacity-10 text-primary mb-3 px-3 py-2 rounded-pill animate-slide-up" style="border: 1px solid rgba(124, 58, 237, 0.3);">New Arrivals Available</span>
+                <h1 class="animate-slide-up delay-100 display-3 fw-bold mb-4" style="line-height: 1.1;">
+                    Elevate Your <br>
+                    <span style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tech Experience</span>
+                </h1>
+                <p class="animate-slide-up delay-200 lead text-secondary mb-5" style="max-width: 90%;">
+                    Discover the latest in premium technology products carefully curated for professionals and enthusiasts. Uncompromising quality meets sleek design.
+                </p>
+                <div class="hero-buttons animate-slide-up delay-300 d-flex gap-3">
+                    <a href="pages/shop.php" class="btn btn-primary btn-lg px-5 rounded-pill shadow-lg d-flex align-items-center gap-2">
+                        Shop Collection <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="pages/about.php" class="btn btn-outline-light btn-lg px-5 rounded-pill d-flex align-items-center gap-2" style="background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.1);">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 position-relative d-none d-lg-block">
+                <!-- Floating Product Image -->
+                <div class="hero-image-wrapper animate-slide-up delay-300" style="animation: floatBubbles 6s ease-in-out infinite alternate; position: relative; z-index: 2;">
+                    <!-- Using a high quality Pixabay image placeholder representing a premium device -->
+                    <img src="https://cdn.pixabay.com/photo/2020/11/22/11/53/apple-5766388_1280.jpg" alt="Premium Tech" class="img-fluid rounded-4 shadow-elevated" style="border: 1px solid rgba(255,255,255,0.1); transform: perspective(1000px) rotateY(-15deg); box-shadow: -20px 20px 40px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.3);">
+                </div>
+            </div>
         </div>
     </div>
 </section>
