@@ -24,6 +24,11 @@ if (!$prod) {
 
 $page_title = $prod['product_name'] . ' - TechStore';
 
+// SEO Meta variables
+$meta_description = substr(strip_tags($prod['description']), 0, 160);
+$meta_keywords = strtolower($prod['category_name']) . ', ' . strtolower($prod['product_name']) . ', tech, buy online';
+$og_image = getProductImageUrl($prod['image'], $prod['product_name']);
+
 // Add to recently viewed
 $product->addRecentlyViewed($product_id, isLoggedIn() ? $_SESSION['user_id'] : null);
 

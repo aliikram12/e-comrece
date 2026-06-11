@@ -48,31 +48,38 @@ class Order {
     
     // Get order by ID
     public function getOrderById($order_id) {
-        $query = "SELECT * FROM $this->table WHERE order_id = $order_id";
+        $query = "SELECT * FROM $this->table WHERE order_id = ?";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_assoc();
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $order_id);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_assoc();
     }
     
     // Get order by order number
     public function getOrderByNumber($order_number) {
-        $order_number = $this->conn->real_escape_string($order_number);
+        $query = "SELECT * FROM $this->table WHERE order_number = ?";
         
-        $query = "SELECT * FROM $this->table WHERE order_number = '$order_number'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("s", $order_number);
+        $stmt->execute();
         
-        $result = $this->conn->query($query);
-        return $result->fetch_assoc();
+        return $stmt->get_result()->fetch_assoc();
     }
     
     // Get user orders
     public function getUserOrders($user_id, $limit = 50) {
         $query = "SELECT * FROM $this->table 
-                  WHERE user_id = $user_id 
+                  WHERE user_id = ? 
                   ORDER BY created_at DESC 
-                  LIMIT $limit";
+                  LIMIT ?";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $user_id, $limit);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Get order items
@@ -80,10 +87,13 @@ class Order {
         $query = "SELECT oi.*, p.product_name, p.image 
                   FROM order_items oi 
                   INNER JOIN products p ON oi.product_id = p.product_id 
-                  WHERE oi.order_id = $order_id";
+                  WHERE oi.order_id = ?";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $order_id);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Update order status
@@ -124,10 +134,13 @@ class Order {
                   FROM $this->table o 
                   INNER JOIN users u ON o.user_id = u.user_id 
                   ORDER BY o.created_at DESC 
-                  LIMIT $limit OFFSET $offset";
+                  LIMIT ? OFFSET ?";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Get total orders

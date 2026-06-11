@@ -42,8 +42,13 @@ $total = $subtotal + $tax + $shipping - $discount;
 // Process order
 $order_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
-    // Check if all items have a color selected
-    $missing_color = false;
+    
+    // Validate CSRF token
+    if (!isset($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) {
+        $order_message = '<div class="alert alert-danger">Security error: Invalid request. Please try again.</div>';
+    } else {
+        // Check if all items have a color selected
+        $missing_color = false;
     foreach ($cart_items as $item) {
         if (empty($item['color'])) {
             $missing_color = true;
@@ -90,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         redirect(SITE_URL . 'pages/order-confirmation.php?order_id=' . $order_id);
     } else {
         $order_message = '<div class="alert alert-danger">Error creating order. Please try again.</div>';
+    }
     }
     }
 }
@@ -295,6 +301,7 @@ include '../includes/header.php';
                     </div>
                     
                     <input type="hidden" name="place_order" value="1">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
                     <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">
                         <i class="fas fa-check me-2"></i>Place Order
                     </button>

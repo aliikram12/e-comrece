@@ -12,9 +12,12 @@ class Wishlist {
     // Add to wishlist
     public function addToWishlist($user_id, $product_id) {
         // Check if already in wishlist
-        $check_query = "SELECT wishlist_id FROM $this->table WHERE user_id = $user_id AND product_id = $product_id";
+        $check_query = "SELECT wishlist_id FROM $this->table WHERE user_id = ? AND product_id = ?";
         
-        $result = $this->conn->query($check_query);
+        $stmt_check = $this->conn->prepare($check_query);
+        $stmt_check->bind_param("ii", $user_id, $product_id);
+        $stmt_check->execute();
+        $result = $stmt_check->get_result();
         
         if ($result->num_rows > 0) {
             return array('success' => false, 'message' => 'Product already in wishlist');
@@ -34,37 +37,48 @@ class Wishlist {
     
     // Remove from wishlist
     public function removeFromWishlist($user_id, $product_id) {
-        $query = "DELETE FROM $this->table WHERE user_id = $user_id AND product_id = $product_id";
+        $query = "DELETE FROM $this->table WHERE user_id = ? AND product_id = ?";
         
-        return $this->conn->query($query);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $user_id, $product_id);
+        
+        return $stmt->execute();
     }
     
     // Get user wishlist
     public function getUserWishlist($user_id) {
         $query = "SELECT p.* FROM products p 
                   INNER JOIN $this->table w ON p.product_id = w.product_id 
-                  WHERE w.user_id = $user_id 
+                  WHERE w.user_id = ? 
                   ORDER BY w.created_at DESC";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Check if product in wishlist
     public function isInWishlist($user_id, $product_id) {
-        $query = "SELECT wishlist_id FROM $this->table WHERE user_id = $user_id AND product_id = $product_id";
+        $query = "SELECT wishlist_id FROM $this->table WHERE user_id = ? AND product_id = ?";
         
-        $result = $this->conn->query($query);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $user_id, $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
         
         return $result->num_rows > 0;
     }
     
     // Get wishlist count
     public function getWishlistCount($user_id) {
-        $query = "SELECT COUNT(*) as count FROM $this->table WHERE user_id = $user_id";
+        $query = "SELECT COUNT(*) as count FROM $this->table WHERE user_id = ?";
         
-        $result = $this->conn->query($query);
-        $row = $result->fetch_assoc();
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $row = $stmt->get_result()->fetch_assoc();
         
         return $row['count'];
     }

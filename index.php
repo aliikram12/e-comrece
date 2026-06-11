@@ -20,11 +20,12 @@ include 'includes/header.php';
 <!-- Hero Section -->
 <section class="hero">
     <div class="container">
-        <h1>Welcome to TechStore</h1>
-        <p>Discover the latest in premium technology products</p>
-        <div class="hero-buttons">
-            <a href="pages/shop.php" class="btn btn-light btn-lg">Shop Now</a>
-            <a href="pages/about.php" class="btn btn-outline-light btn-lg">Learn More</a>
+        <span class="badge bg-primary bg-opacity-10 text-primary mb-3 px-3 py-2 rounded-pill animate-slide-up">New Arrivals Available</span>
+        <h1 class="animate-slide-up delay-100">Elevate Your Tech<br>Experience Today</h1>
+        <p class="animate-slide-up delay-200">Discover the latest in premium technology products carefully curated for professionals and enthusiasts.</p>
+        <div class="hero-buttons animate-slide-up delay-300">
+            <a href="pages/shop.php" class="btn btn-primary btn-lg px-5 rounded-pill">Shop Collection</a>
+            <a href="pages/about.php" class="btn btn-outline-light btn-lg px-5 rounded-pill">Learn More</a>
         </div>
     </div>
 </section>

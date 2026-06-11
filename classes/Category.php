@@ -19,28 +19,35 @@ class Category {
     
     // Get category by ID
     public function getCategoryById($category_id) {
-        $query = "SELECT * FROM $this->table WHERE category_id = $category_id AND is_active = TRUE";
+        $query = "SELECT * FROM $this->table WHERE category_id = ? AND is_active = TRUE";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_assoc();
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $category_id);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_assoc();
     }
     
     // Get category by slug
     public function getCategoryBySlug($slug) {
-        $slug = $this->conn->real_escape_string($slug);
+        $query = "SELECT * FROM $this->table WHERE slug = ? AND is_active = TRUE";
         
-        $query = "SELECT * FROM $this->table WHERE slug = '$slug' AND is_active = TRUE";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("s", $slug);
+        $stmt->execute();
         
-        $result = $this->conn->query($query);
-        return $result->fetch_assoc();
+        return $stmt->get_result()->fetch_assoc();
     }
     
     // Get subcategories
     public function getSubcategories($parent_id) {
-        $query = "SELECT * FROM $this->table WHERE parent_category_id = $parent_id AND is_active = TRUE ORDER BY category_name ASC";
+        $query = "SELECT * FROM $this->table WHERE parent_category_id = ? AND is_active = TRUE ORDER BY category_name ASC";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $parent_id);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }
 ?>

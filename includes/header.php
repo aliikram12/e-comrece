@@ -8,8 +8,18 @@
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TechStore — Your one-stop destination for premium technology products at affordable prices.">
-    <title><?php echo $page_title ?? 'TechStore'; ?></title>
+    <meta name="description" content="<?php echo $meta_description ?? 'TechStore — Your one-stop destination for premium technology products. Elevate your tech experience.'; ?>">
+    <meta name="keywords" content="<?php echo $meta_keywords ?? 'technology, store, laptops, smartphones, premium tech, electronics'; ?>">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social SEO -->
+    <meta property="og:title" content="<?php echo $page_title ?? 'TechStore - Premium Technology'; ?>">
+    <meta property="og:description" content="<?php echo $meta_description ?? 'TechStore — Your one-stop destination for premium technology products.'; ?>">
+    <meta property="og:image" content="<?php echo $og_image ?? SITE_URL . 'assets/images/default-og.jpg'; ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>">
+
+    <title><?php echo $page_title ?? 'TechStore - Premium Technology'; ?></title>
     
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
