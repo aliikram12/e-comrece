@@ -71,24 +71,8 @@ function getProductImageUrl($image, $productName = '') {
         return strpos($image, 'http') === 0 ? $image : SITE_URL . ltrim($image, '/');
     }
 
-    if (!empty($productName)) {
-        $productName = strtolower($productName);
-        $keywords = [
-            'iphone', 'android', 'smartphone', 'laptop', 'notebook', 'macbook', 'tablet',
-            'headphone', 'earbuds', 'watch', 'camera', 'lens', 'speaker', 'console',
-            'monitor', 'keyboard', 'mouse', 'printer', 'drone', 'router', 'software', 'gaming'
-        ];
-
-        foreach ($keywords as $keyword) {
-            if (strpos($productName, $keyword) !== false) {
-                return 'https://source.unsplash.com/featured/800x600?' . rawurlencode($keyword . ' technology');
-            }
-        }
-
-        return 'https://source.unsplash.com/featured/800x600?' . rawurlencode($productName . ' technology');
-    }
-
-    return 'https://source.unsplash.com/featured/800x600?technology';
+    // Default high-quality tech fallback image from Pixabay
+    return 'https://cdn.pixabay.com/photo/2014/05/02/21/50/laptop-336378_1280.jpg';
 }
 
 // Helper function to return a profile image URL or default avatar

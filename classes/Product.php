@@ -18,10 +18,12 @@ class Product {
                   LEFT JOIN categories c ON p.category_id = c.category_id 
                   WHERE p.status = 'active' 
                   ORDER BY p.created_at DESC 
-                  LIMIT $limit OFFSET $offset";
+                  LIMIT ? OFFSET ?";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Get products by category
@@ -31,12 +33,14 @@ class Product {
         $query = "SELECT p.*, c.category_name 
                   FROM $this->table p 
                   LEFT JOIN categories c ON p.category_id = c.category_id 
-                  WHERE p.category_id = $category_id AND p.status = 'active' 
+                  WHERE p.category_id = ? AND p.status = 'active' 
                   ORDER BY p.created_at DESC 
-                  LIMIT $limit OFFSET $offset";
+                  LIMIT ? OFFSET ?";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("iii", $category_id, $limit, $offset);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Get products for admin management
@@ -99,19 +103,21 @@ class Product {
     
     // Search products
     public function searchProducts($search_term, $page = 1, $limit = 12) {
-        $search_term = $this->conn->real_escape_string($search_term);
         $offset = ($page - 1) * $limit;
+        $search_like = "%$search_term%";
         
         $query = "SELECT p.*, c.category_name 
                   FROM $this->table p 
                   LEFT JOIN categories c ON p.category_id = c.category_id 
-                  WHERE (p.product_name LIKE '%$search_term%' OR p.description LIKE '%$search_term%') 
+                  WHERE (p.product_name LIKE ? OR p.description LIKE ?) 
                   AND p.status = 'active' 
                   ORDER BY p.product_name ASC 
-                  LIMIT $limit OFFSET $offset";
+                  LIMIT ? OFFSET ?";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ssii", $search_like, $search_like, $limit, $offset);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Get product by ID
@@ -120,24 +126,26 @@ class Product {
                   FROM $this->table p 
                   LEFT JOIN categories c ON p.category_id = c.category_id 
                   LEFT JOIN users u ON p.vendor_id = u.user_id 
-                  WHERE p.product_id = $product_id";
+                  WHERE p.product_id = ?";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_assoc();
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
     }
     
     // Get product by slug
     public function getProductBySlug($slug) {
-        $slug = $this->conn->real_escape_string($slug);
-        
         $query = "SELECT p.*, c.category_name, u.first_name as vendor_name 
                   FROM $this->table p 
                   LEFT JOIN categories c ON p.category_id = c.category_id 
                   LEFT JOIN users u ON p.vendor_id = u.user_id 
-                  WHERE p.slug = '$slug'";
+                  WHERE p.slug = ?";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_assoc();
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("s", $slug);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
     }
     
     // Get featured products
@@ -178,21 +186,25 @@ class Product {
     // Get product images
     public function getProductImages($product_id) {
         $query = "SELECT * FROM product_images 
-                  WHERE product_id = $product_id 
+                  WHERE product_id = ? 
                   ORDER BY display_order ASC";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Get product variants
     public function getProductVariants($product_id) {
         $query = "SELECT * FROM product_variants 
-                  WHERE product_id = $product_id 
+                  WHERE product_id = ? 
                   ORDER BY created_at ASC";
         
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Get total products count
@@ -200,18 +212,27 @@ class Product {
         $query = "SELECT COUNT(*) as total FROM $this->table";
 
         $conditions = [];
+        $params = [];
+        $types = "";
+        
         if ($activeOnly) {
             $conditions[] = "status = 'active'";
         }
         if ($category_id) {
-            $conditions[] = "category_id = $category_id";
+            $conditions[] = "category_id = ?";
+            $params[] = $category_id;
+            $types .= "i";
         }
         if (!empty($conditions)) {
             $query .= " WHERE " . implode(' AND ', $conditions);
         }
         
-        $result = $this->conn->query($query);
-        $row = $result->fetch_assoc();
+        $stmt = $this->conn->prepare($query);
+        if (!empty($params)) {
+            $stmt->bind_param($types, ...$params);
+        }
+        $stmt->execute();
+        $row = $stmt->get_result()->fetch_assoc();
         
         return $row['total'];
     }
