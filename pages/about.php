@@ -15,11 +15,11 @@ include '../includes/header.php';
         </ol>
     </nav>
     
-    <h1 class="mb-4">About TechStore</h1>
+    <h1 class="section-title mb-5">About TechStore</h1>
     
     <div class="row">
         <div class="col-lg-8">
-            <h2>Our Story</h2>
+            <h2 class="mb-4 text-heading">Our Story</h2>
             <p>TechStore was founded with a simple mission: to provide customers with access to the latest technology products at affordable prices. Since our inception, we've grown to become one of the leading online retailers of premium tech products.</p>
             
             <h3 class="mt-4">Our Mission</h3>
@@ -34,37 +34,37 @@ include '../includes/header.php';
                 <li><strong>Reliability:</strong> We promise fast shipping and secure transactions.</li>
             </ul>
             
-            <h3 class="mt-4">Why Choose Us?</h3>
+            <h3 class="mt-5 mb-4 text-heading">Why Choose Us?</h3>
             <div class="row mt-3">
-                <div class="col-md-6 mb-3">
-                    <div class="card border-0 bg-light">
+                <div class="col-md-6 mb-4">
+                    <div class="promo-card p-3 h-100">
                         <div class="card-body">
-                            <h6 class="card-title"><i class="fas fa-shipping-fast text-primary me-2"></i>Fast Shipping</h6>
-                            <p class="card-text">Free shipping on orders over $50. Fast delivery to your doorstep.</p>
+                            <h6 class="card-title fw-bold text-heading"><i class="fas fa-shipping-fast text-primary me-2"></i>Fast Shipping</h6>
+                            <p class="card-text text-secondary mb-0">Free shipping on orders over $50. Fast delivery to your doorstep.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <div class="card border-0 bg-light">
+                <div class="col-md-6 mb-4">
+                    <div class="promo-card p-3 h-100">
                         <div class="card-body">
-                            <h6 class="card-title"><i class="fas fa-shield-alt text-primary me-2"></i>Secure Payment</h6>
-                            <p class="card-text">100% secure payment gateway with multiple payment options.</p>
+                            <h6 class="card-title fw-bold text-heading"><i class="fas fa-shield-alt text-primary me-2"></i>Secure Payment</h6>
+                            <p class="card-text text-secondary mb-0">100% secure payment gateway with multiple payment options.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <div class="card border-0 bg-light">
+                <div class="col-md-6 mb-4">
+                    <div class="promo-card p-3 h-100">
                         <div class="card-body">
-                            <h6 class="card-title"><i class="fas fa-undo text-primary me-2"></i>Easy Returns</h6>
-                            <p class="card-text">30-day return policy. No questions asked.</p>
+                            <h6 class="card-title fw-bold text-heading"><i class="fas fa-undo text-primary me-2"></i>Easy Returns</h6>
+                            <p class="card-text text-secondary mb-0">30-day return policy. No questions asked.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <div class="card border-0 bg-light">
+                <div class="col-md-6 mb-4">
+                    <div class="promo-card p-3 h-100">
                         <div class="card-body">
-                            <h6 class="card-title"><i class="fas fa-headset text-primary me-2"></i>24/7 Support</h6>
-                            <p class="card-text">Round-the-clock customer support to help you.</p>
+                            <h6 class="card-title fw-bold text-heading"><i class="fas fa-headset text-primary me-2"></i>24/7 Support</h6>
+                            <p class="card-text text-secondary mb-0">Round-the-clock customer support to help you.</p>
                         </div>
                     </div>
                 </div>
@@ -72,15 +72,15 @@ include '../includes/header.php';
         </div>
         
         <div class="col-lg-4">
-            <div class="card border-0 shadow-sm">
+            <div class="promo-card p-4">
                 <div class="card-body">
-                    <h5 class="card-title mb-3">Quick Facts</h5>
+                    <h5 class="card-title mb-4 fw-bold text-heading"><i class="fas fa-info-circle text-primary me-2"></i>Quick Facts</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><strong>Founded:</strong> 2024</li>
-                        <li class="mb-2"><strong>Products:</strong> 1000+</li>
-                        <li class="mb-2"><strong>Customers:</strong> 10000+</li>
-                        <li class="mb-2"><strong>Brands:</strong> 100+</li>
-                        <li class="mb-2"><strong>Regions:</strong> Nationwide</li>
+                        <li class="mb-3 d-flex justify-content-between"><strong class="text-secondary">Founded:</strong> <span>2024</span></li>
+                        <li class="mb-3 d-flex justify-content-between"><strong class="text-secondary">Products:</strong> <span>1000+</span></li>
+                        <li class="mb-3 d-flex justify-content-between"><strong class="text-secondary">Customers:</strong> <span>10000+</span></li>
+                        <li class="mb-3 d-flex justify-content-between"><strong class="text-secondary">Brands:</strong> <span>100+</span></li>
+                        <li class="mb-3 d-flex justify-content-between"><strong class="text-secondary">Regions:</strong> <span>Worldwide</span></li>
                     </ul>
                 </div>
             </div>

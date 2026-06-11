@@ -51,33 +51,33 @@ include 'includes/header.php';
 </section>
 
 <!-- Promo Banners -->
-<section class="py-4 bg-light">
+<section class="py-5" style="background: var(--bg-primary);">
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-3">
-                <div class="card text-center border-0">
+                <div class="promo-card text-center p-4 h-100">
                     <div class="card-body">
-                        <i class="fas fa-shipping-fast fa-2x text-primary mb-3"></i>
-                        <h5 class="card-title">Free Shipping</h5>
-                        <p class="card-text">On orders over $50</p>
+                        <i class="fas fa-shipping-fast fa-2x text-primary mb-3" style="filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.4));"></i>
+                        <h5 class="card-title text-heading fw-bold">Free Shipping</h5>
+                        <p class="card-text text-secondary">On orders over $50. Fast delivery to your doorstep.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
-                <div class="card text-center border-0">
+                <div class="promo-card text-center p-4 h-100">
                     <div class="card-body">
-                        <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
-                        <h5 class="card-title">Secure Payment</h5>
-                        <p class="card-text">100% safe transactions</p>
+                        <i class="fas fa-shield-alt fa-2x text-primary mb-3" style="filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.4));"></i>
+                        <h5 class="card-title text-heading fw-bold">Secure Payment</h5>
+                        <p class="card-text text-secondary">100% safe transactions via 256-bit SSL encryption.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
-                <div class="card text-center border-0">
+                <div class="promo-card text-center p-4 h-100">
                     <div class="card-body">
-                        <i class="fas fa-undo fa-2x text-primary mb-3"></i>
-                        <h5 class="card-title">Easy Returns</h5>
-                        <p class="card-text">30-day return policy</p>
+                        <i class="fas fa-undo fa-2x text-primary mb-3" style="filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.4));"></i>
+                        <h5 class="card-title text-heading fw-bold">Easy Returns</h5>
+                        <p class="card-text text-secondary">30-day return policy. No questions asked.</p>
                     </div>
                 </div>
             </div>
@@ -239,16 +239,20 @@ include 'includes/header.php';
 </section>
 
 <!-- Newsletter Signup -->
-<section class="py-5 bg-primary text-white">
-    <div class="container">
+<section class="py-5 text-center position-relative overflow-hidden" style="background: rgba(124, 58, 237, 0.05); border-top: 1px solid rgba(255,255,255,0.05);">
+    <!-- Abstract background circles -->
+    <div class="position-absolute rounded-circle" style="width: 300px; height: 300px; background: rgba(56, 189, 248, 0.05); top: -100px; left: -100px; filter: blur(50px);"></div>
+    <div class="position-absolute rounded-circle" style="width: 400px; height: 400px; background: rgba(124, 58, 237, 0.05); bottom: -150px; right: -100px; filter: blur(60px);"></div>
+    
+    <div class="container position-relative z-index-2">
         <div class="row">
-            <div class="col-lg-6 mx-auto text-center">
-                <h2 class="mb-3">Subscribe to Our Newsletter</h2>
-                <p class="mb-4">Get exclusive deals and updates delivered to your inbox</p>
-                <form action="api/newsletter.php" method="POST">
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Enter your email" required>
-                        <button class="btn btn-warning" type="submit">Subscribe</button>
+            <div class="col-lg-6 mx-auto">
+                <h2 class="mb-3 fw-bold text-heading">Subscribe to Our Newsletter</h2>
+                <p class="mb-4 text-secondary">Get exclusive deals and updates delivered to your inbox</p>
+                <form action="api/newsletter.php" method="POST" class="needs-validation">
+                    <div class="input-group mb-3 shadow-lg" style="border-radius: var(--radius-lg); overflow: hidden;">
+                        <input type="email" class="form-control border-0 px-4 py-3 bg-white bg-opacity-10 text-white" name="email" placeholder="Enter your email address" required style="backdrop-filter: blur(10px);">
+                        <button class="btn btn-primary px-4 fw-bold" type="submit" style="background: var(--gradient-primary); border: none;">Subscribe</button>
                     </div>
                 </form>
             </div>

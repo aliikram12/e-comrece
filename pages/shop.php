@@ -46,13 +46,15 @@ include '../includes/header.php';
         </ol>
     </nav>
     
-    <h2 class="mb-4">Our Products</h2>
+    <h2 class="section-title mb-4">Our Products</h2>
     
     <div class="row">
         <!-- Sidebar Filters -->
         <div class="col-lg-3">
-            <div class="filters-sidebar">
-                <h5 class="mb-4">Filters</h5>
+            <div class="promo-card p-4 mb-4">
+                <h5 class="mb-4 fw-bold text-heading">
+                    <i class="fas fa-filter text-primary me-2"></i>Filters
+                </h5>
                 
                 <!-- Categories -->
                 <div class="filter-group">
@@ -96,7 +98,9 @@ include '../includes/header.php';
                     </select>
                 </div>
                 
-                <button class="btn btn-outline-secondary w-100" onclick="resetFilters()">Reset Filters</button>
+                <button class="btn btn-outline-primary w-100 rounded-pill" onclick="resetFilters()">
+                    <i class="fas fa-sync-alt me-2"></i>Reset Filters
+                </button>
             </div>
         </div>
         

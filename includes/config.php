@@ -7,8 +7,22 @@ define('DB_NAME', 'techstore');
 
 // Site Configuration
 define('SITE_NAME', 'TechStore');
-define('SITE_URL', 'http://localhost/e-comrece/');
-define('ADMIN_URL', 'http://localhost/e-comrece/admin/');
+
+// Dynamic SITE_URL detection — makes the project fully portable
+// Works regardless of folder name, location, or server configuration
+$_protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$_host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+// Detect the project root from the current script path
+$_scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+// Walk up from subdirectories (pages/, admin/, api/) to find the project root
+// The project root contains includes/config.php — we know __DIR__ points to includes/
+$_projectRoot = str_replace('\\', '/', dirname(__DIR__));
+$_docRoot = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
+$_basePath = str_replace($_docRoot, '', $_projectRoot);
+$_basePath = '/' . trim($_basePath, '/') . '/';
+
+define('SITE_URL', $_protocol . '://' . $_host . $_basePath);
+define('ADMIN_URL', SITE_URL . 'admin/');
 
 // Pagination
 define('ITEMS_PER_PAGE', 12);
